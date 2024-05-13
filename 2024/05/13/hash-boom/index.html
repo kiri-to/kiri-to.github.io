@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>hash boom | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="日常Hash密码破解方法前言：    hash是什么想必无需赘述，日常生活中我们登录qq，windows以及各大网站都需要输入用户名密码，这些密码由于会通过公共网络传输，为了提高安全性通常不会使用明文传输，一种大众的做法是传输hash后的密码，服务器中也只存储hash后的密码，有的厂商会通过加盐hash来提高密码的安全性。     除了登录网络应用外，本地许多文件也会需要密码才能使用，当我们从网站">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hash boom">
+<meta property="og:url" content="http://example.com/2024/05/13/hash-boom/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="日常Hash密码破解方法前言：    hash是什么想必无需赘述，日常生活中我们登录qq，windows以及各大网站都需要输入用户名密码，这些密码由于会通过公共网络传输，为了提高安全性通常不会使用明文传输，一种大众的做法是传输hash后的密码，服务器中也只存储hash后的密码，有的厂商会通过加盐hash来提高密码的安全性。     除了登录网络应用外，本地许多文件也会需要密码才能使用，当我们从网站">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-05-13T05:44:50.000Z">
+<meta property="article:modified_time" content="2024-05-13T05:49:07.160Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 7.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-hash-boom" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2024/05/13/hash-boom/" class="article-date">
+  <time class="dt-published" datetime="2024-05-13T05:44:50.000Z" itemprop="datePublished">2024-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      hash boom
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="日常Hash密码破解方法"><a href="#日常Hash密码破解方法" class="headerlink" title="日常Hash密码破解方法"></a>日常Hash密码破解方法</h1><h2 id="前言："><a href="#前言：" class="headerlink" title="前言："></a>前言：</h2><p>    hash是什么想必无需赘述，日常生活中我们登录qq，windows以及各大网站都需要输入用户名密码，这些密码由于会通过公共网络传输，为了提高安全性通常不会使用明文传输，一种大众的做法是传输hash后的密码，服务器中也只存储hash后的密码，有的厂商会通过加盐hash来提高密码的安全性。</p>
+<p>    除了登录网络应用外，本地许多文件也会需要密码才能使用，当我们从网站上下了个游戏压缩包，解压时才发现需要密码这是很常见的事，最合理的方式是先查询发布者官网或查看迅雷评论区(社工yyds)，没发现的话只能自行尝试破解了，其实无论是加密的压缩包还是加密的office文件，windows登录所输入的密码，乃至部分路由器密码等都是通过计算hash后的序列来验证的，所以掌握hash破解是很有用的一件事    </p>
+<h2 id="破解原理："><a href="#破解原理：" class="headerlink" title="破解原理："></a>破解原理：</h2><p>作为市面上常用的hash算法，如md5，sha1等，其不可逆性想必是得到验证的 ，那么通常只能通过枚举已知明文的hash序列与目标序列比较来暴力破解，基本分为两类：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">查字典：</span><br><span class="line">    通过事先算好所有密文的hash序列组成映射表存储在磁盘中，假设用户密码长度为8位，由大小写字母与数字组成，那么就有62^8=2.18e14种可能，起码需要4000T的磁盘来存储，假设磁盘读写速度为2GB/s，还需要25天来破解，对普通用户来说，恐怕很难有密码值得这么长时间的花费，且这才仅仅</span><br><span class="line">假设是8位密码。</span><br><span class="line">    但人不是机器，人们常用的密码难免是有规律的，如123456，生日，手机号等，很多人多个网站使用的密码也会相同，如此可以通过收集各大网站泄露的库以及常用的密码并保存到文件中，这样的文件便会比完全的映射表小很多，且破解成功率尚可</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">爆破：</span><br><span class="line">    与查字典相比，爆破可以算以时间换空间了吧，不需要实现生成字典，通过定义规则来实时计算出明文hash并与目标hash比对，其实对于现在的高性能cpu来说，如intel 12900，实时爆破的速度已经很高，相比查字典的IO速率已不弱多少，更别说GPU运算的速度已经达到10GHash/s（我用的6700xt中端显卡），完全映射表应该没有存在的价值了</span><br></pre></td></tr></table></figure>
+
+<p>虽然hash并没有被发现逆向算法，但还是有大牛发现了一些取巧的方法可以大大缩短破解的时间，如彩虹表，个人理解有限，原理就贴一下别人的博客吧：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1681863">彻底搞懂彩虹表的实现原理-腾讯云开发者社区-腾讯云</a></p>
+<h2 id="破解工具"><a href="#破解工具" class="headerlink" title="破解工具:"></a>破解工具:</h2><p>    爆破：             hashcat，可以使用cpu，gpu，fpga等多种运算核心，可以分布式爆破，可以通过mask，dicts，rule等多种规则自由定义目标范围，自称最强的hash爆破工具。</p>
+<p>    彩虹表:            rainbowcrack</p>
+<p>    提取hash:       john(包括rar2john,zip2john等)</p>
+<h2 id="个人工作流："><a href="#个人工作流：" class="headerlink" title="个人工作流："></a>个人工作流：</h2><p>    1.使用11位纯数字爆破（单12900kf预计耗时2min）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 100 -a 3 -O 42c231120f22dfd0f0ee3446cdcc5fb5dfb02855  --increment  ?d?d?d?d?d?d?d?d?d?d?d</span><br></pre></td></tr></table></figure>
+
+<p>    2.使用6位大小写及数字（预计1min）:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 100 -a 3 -O 42c231120f22dfd0f0ee3446cdcc5fb5dfb02855 --increment   -1 ?l?u?d    ?1?1?1?1?1?1</span><br></pre></td></tr></table></figure>
+
+<p>    3.跑彩虹表</p>
+<p>    4.某些国内作者的压缩包密码是中文，hashcat非ascii字符破解可参考: <a target="_blank" rel="noopener" href="https://kknews.cc/tech/qlpo2g.html">使用Hashcat破解utf8汉语、韩语、以及俄语等非英语密码</a></p>
+<p>    windows中字符默认使用ANSI编码，在中国便是gbk编码，gbk是单双字节码，英文等符号单字节，中文双字节，兼容ascii以及gb2312，收录了2w+汉字，笔者假设密码使用了常用汉字，故使用gb2312编码来破解gbk的汉字查询wiki可知gb2312汉字第一字节编码范围是B0-F7，第二字节A1-FE。由此可以自定义charset1为B0-F7,charset2为A1-FE，那么?1?2便可以表示一个汉字，可惜charset不能与mask一起使用，可以shell脚本来尝试汉字与数字等其他组合</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hashcat -m 100 -a 3 -O ff0aaebf4d7a6abe62217aac87e2092e38441533  --hex-charset -1 b0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7 -2 a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfe  ?1?2?1?2?d?d</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2024/05/13/hash-boom/" data-id="clw4k1c6800000wlsglwld5ab" data-title="hash boom" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/13/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2024/05/">May 2024</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2024/05/13/hash-boom/">hash boom</a>
+          </li>
+        
+          <li>
+            <a href="/2024/05/13/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2024 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
